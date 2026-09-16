@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div.container
+    h1 > MODO-DOS OS v1.0
+    h2 > INICIANDO SISTEMA TURNOFLEX...
+    p > ESTADO: ONLINE (PUERTO 3000)
+    br
+    p > ACCESOS DIRECTOS A LA API REST (MODO LECTURA):
+    ul
+      li: a(href="/api/profesionales") C:\> GET /api/profesionales
+      li: a(href="/api/turnos") C:\> GET /api/turnos
+    br
+    p > ADVERTENCIA: PARA OPERACIONES DE ESCRITURA (POST, PUT, DELETE) UTILICE THUNDER CLIENT.
+    p > 
+      span C:\> ESPERANDO COMANDOS 
+      span.cursor

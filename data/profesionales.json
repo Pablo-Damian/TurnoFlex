@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "nombre": "Dr. René Favaloro",
+    "especialidad": "Cardiología"
+  },
+  {
+    "id": 2,
+    "nombre": "Dra. Cecilia Grierson",
+    "especialidad": "Medicina General"
+  },
+  {
+    "id": 3,
+    "nombre": "Dr. Bernardo Houssay",
+    "especialidad": "Endocrinología"
+  }
+]
