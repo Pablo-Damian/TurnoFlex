@@ -96,4 +96,3 @@ TurnoFlex/
 * **Control de superposición:** No se permite asignar dos turnos a un mismo profesional en la misma fecha y horario si el turno está activo.
 * **Estados estrictos:** Los turnos únicamente aceptan los estados `'reservado'`, `'cancelado'` o `'atendido'`.
 * **Cancelaciones seguras:** Cancelar un turno libera automáticamente la franja horaria para nuevas reservas.
-```
