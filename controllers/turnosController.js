@@ -13,9 +13,16 @@ const guardarTurnos = (turnos) => {
     fs.writeFileSync(rutaArchivo, JSON.stringify(turnos, null, 2));
 };
 
-// GET: Obtener todos los turnos
+// GET: Obtener turnos (con filtro opcional por estado)
 const obtenerTurnos = (req, res) => {
-    const turnos = leerTurnos();
+    let turnos = leerTurnos();
+
+    // Implementación de Parámetros de consulta (Query Params)
+    // Ej: /api/turnos?estado=reservado
+    if (req.query.estado) {
+        turnos = turnos.filter(t => t.estado.toLowerCase() === req.query.estado.toLowerCase());
+    }
+
     res.status(200).json(turnos);
 };
 

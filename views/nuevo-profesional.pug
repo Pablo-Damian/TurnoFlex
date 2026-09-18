@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  div.container
+    h1 > MODO-DOS OS v1.0
+    h2 > MODULO DE INGRESO DE DATOS
+    p > POR FAVOR, INGRESE LOS DATOS DEL NUEVO PROFESIONAL:
+    br
+    //- El formulario envía los datos por POST a nuestra API
+    form(action="/api/profesionales" method="POST" style="display: flex; flex-direction: column; gap: 15px; max-width: 400px;")
+      div
+        label(for="nombre" style="color: #33ff00;") > NOMBRE:
+        br
+        input(type="text" id="nombre" name="nombre" required style="background: black; color: #33ff00; border: 1px solid #33ff00; padding: 5px; width: 100%; font-family: 'Courier New';")
+      
+      div
+        label(for="especialidad" style="color: #33ff00;") > ESPECIALIDAD:
+        br
+        input(type="text" id="especialidad" name="especialidad" required style="background: black; color: #33ff00; border: 1px solid #33ff00; padding: 5px; width: 100%; font-family: 'Courier New';")
+      
+      div
+        button(type="submit" style="background: #33ff00; color: black; border: none; padding: 10px; cursor: pointer; font-family: 'Courier New'; font-weight: bold;") [ ENVIAR DATOS ]
+    
+    br
+    p
+      a(href="/") < VOLVER AL INICIO

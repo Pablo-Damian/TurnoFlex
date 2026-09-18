@@ -3,16 +3,23 @@ body {
     background-color: #000000;
     color: #33ff00; /* Verde terminal */
     font-family: 'Courier New', Courier, monospace;
-    padding: 20px;
     margin: 0;
+    padding: 20px;
+    /* Flexbox para centrar vertical/horizontalmente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .container {
     border: 2px solid #33ff00;
-    padding: 20px;
+    padding: 30px;
     max-width: 800px;
-    margin: 0 auto;
-    box-shadow: 0 0 10px #33ff00;
+    width: 100%; /* responsive en pantallas chicas */
+    box-shadow: 0 0 15px #33ff00;
 }
 
 h1, h2 {

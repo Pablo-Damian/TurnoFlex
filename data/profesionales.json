@@ -13,5 +13,15 @@
     "id": 3,
     "nombre": "Dr. Bernardo Houssay",
     "especialidad": "Endocrinología"
+  },
+  {
+    "id": 4,
+    "nombre": "Dr. Gregory House",
+    "especialidad": "Diagnóstico"
+  },
+  {
+    "id": 5,
+    "nombre": "Dr. Gregory House",
+    "especialidad": "Diagnóstico"
   }
 ]
