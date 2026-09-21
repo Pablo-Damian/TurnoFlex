@@ -80,11 +80,12 @@ TurnoFlex/
 | **POST** | `/api/profesionales` | Da de alta un nuevo profesional | `201 Created` / `400 Bad Request` |
 | **PUT** | `/api/profesionales/:id` | Modifica datos de un profesional | `200 OK` / `404 Not Found` |
 | **DELETE** | `/api/profesionales/:id` | Elimina un profesional del sistema | `200 OK` / `404 Not Found` |
+| **GET** | `/nuevo-profesional` | Vista web con formulario interactivo de alta (Pug) | `200 OK` |
 
 ### Turnos (`/api/turnos`)
 | Método | Endpoint | Descripción | Estado HTTP |
 | :--- | :--- | :--- | :--- |
-| **GET** | `/api/turnos` | Obtiene todos los turnos registrados | `200 OK` |
+| **GET** | `/api/turnos` | Lista turnos (admite filtro por estado: `?estado=reservado`) | `200 OK` |
 | **GET** | `/api/turnos/:id` | Obtiene el detalle de un turno por ID | `200 OK` / `404 Not Found` |
 | **POST** | `/api/turnos` | Reserva un turno (Valida disponibilidad) | `201 Created` / `400 Bad Request` |
 | **PUT** | `/api/turnos/:id` | Actualiza estado (reservado, cancelado, atendido) | `200 OK` / `400 / 404` |
