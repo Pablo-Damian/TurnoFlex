@@ -6,23 +6,24 @@ const conectarDB = require('./config/db');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Inicializar la conexión a la base de datos
+// Inicializacion de la conexion a MongoDB Atlas
 conectarDB();
 
-// Importar los enrutadores
+// Importacion de enrutadores modulares
 const profesionalesRoutes = require('./routes/profesionalesRoutes');
 const turnosRoutes = require('./routes/turnosRoutes');
+const authRoutes = require('./routes/authRoutes');
 
-// --- MIDDLEWARES GLOBALES ---
+// Middlewares globales de procesamiento
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// --- CONFIGURACIÓN DEL MOTOR DE PLANTILLAS (PUG) ---
+// Configuracion del motor de plantillas Pug
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// --- RUTAS DE LAS VISTAS (FRONTEND BÁSICO) ---
+// Rutas para vistas de servidor (SSR)
 app.get('/', (req, res) => {
     res.render('index', { titulo: 'TurnoFlex - Inicio' });
 });
@@ -31,16 +32,17 @@ app.get('/nuevo-profesional', (req, res) => {
     res.render('nuevo-profesional', { titulo: 'TurnoFlex - Nuevo Profesional' });
 });
 
-// --- RUTAS DE LA API REST ---
+// Montaje de rutas de la API REST
+app.use('/api/auth', authRoutes);
 app.use('/api/profesionales', profesionalesRoutes);
 app.use('/api/turnos', turnosRoutes);
 
-// --- MANEJO DE ERRORES (404) ---
+// Manejo centralizado de recursos no encontrados (404)
 app.use((req, res) => {
     res.status(404).json({ error: '404 - Ruta no encontrada en TurnoFlex' });
 });
 
-// --- INICIAR SERVIDOR ---
+// Apertura del socket del servidor
 app.listen(PORT, () => {
     console.log(`🚀 Servidor TurnoFlex corriendo en http://localhost:${PORT}`);
 });

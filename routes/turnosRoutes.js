@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// Importamos las funciones del controlador
 const {
     obtenerTurnos,
     obtenerTurnoPorId,
@@ -10,11 +9,17 @@ const {
     eliminarTurno
 } = require('../controllers/turnosController');
 
-// Definimos las rutas CRUD para los Turnos
+const { verificarToken, permitirRoles } = require('../middlewares/auth');
+
+// Rutas de lectura (abiertas a consulta de agenda)
 router.get('/', obtenerTurnos);
 router.get('/:id', obtenerTurnoPorId);
-router.post('/', crearTurno);
-router.put('/:id', actualizarTurno);
-router.delete('/:id', eliminarTurno);
+
+// Rutas protegidas que requieren token JWT valido
+router.post('/', verificarToken, crearTurno);
+router.put('/:id', verificarToken, actualizarTurno);
+
+// Ruta con autorizacion estricta por rol (solo administradores pueden eliminar registros)
+router.delete('/:id', verificarToken, permitirRoles('admin'), eliminarTurno);
 
 module.exports = router;
