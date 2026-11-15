@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 
+// Verifica la presencia, formato y firma HS256 del token JWT en la cabecera Authorization
 const verificarToken = (req, res, next) => {
     const authHeader = req.headers['authorization'] || req.headers['Authorization'];
 
@@ -19,8 +20,11 @@ const verificarToken = (req, res, next) => {
     const token = partes[1];
     const jwtSecret = process.env.JWT_SECRET;
 
-    if (!jwtSecret) {
-        console.error('JWT_SECRET no configurado');
+    if (
+        typeof jwtSecret !== 'string' ||
+        Buffer.byteLength(jwtSecret, 'utf8') < 32
+    ) {
+        console.error('JWT_SECRET no configurado adecuadamente');
         return res.status(500).json({
             mensaje: 'Error interno de configuracion de seguridad'
         });
@@ -50,6 +54,7 @@ const verificarToken = (req, res, next) => {
     }
 };
 
+// Restringe el acceso a los roles especificados segun el payload del token
 const permitirRoles = (...rolesPermitidos) => {
     return (req, res, next) => {
         if (!req.usuario || !req.usuario.rol) {

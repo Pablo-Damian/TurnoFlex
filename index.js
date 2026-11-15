@@ -6,9 +6,6 @@ const conectarDB = require('./config/db');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Inicializacion de la conexion a MongoDB Atlas
-conectarDB();
-
 // Importacion de enrutadores modulares
 const profesionalesRoutes = require('./routes/profesionalesRoutes');
 const turnosRoutes = require('./routes/turnosRoutes');
@@ -42,7 +39,17 @@ app.use((req, res) => {
     res.status(404).json({ error: '404 - Ruta no encontrada en TurnoFlex' });
 });
 
-// Apertura del socket del servidor
-app.listen(PORT, () => {
-    console.log(`🚀 Servidor TurnoFlex corriendo en http://localhost:${PORT}`);
-});
+// Inicializacion secuencial: conexion previa a MongoDB antes de abrir el puerto HTTP
+const iniciarServidor = async () => {
+    try {
+        await conectarDB();
+        app.listen(PORT, () => {
+            console.log(`🚀 Servidor TurnoFlex corriendo en http://localhost:${PORT}`);
+        });
+    } catch (error) {
+        console.error('Error al iniciar el servidor TurnoFlex:', error.message);
+        process.exit(1);
+    }
+};
+
+iniciarServidor();

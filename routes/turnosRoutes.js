@@ -11,15 +11,15 @@ const {
 
 const { verificarToken, permitirRoles } = require('../middlewares/auth');
 
-// Rutas de lectura (abiertas a consulta de agenda)
+// Rutas de consulta general y por identificador
 router.get('/', obtenerTurnos);
 router.get('/:id', obtenerTurnoPorId);
 
-// Rutas protegidas que requieren token JWT valido
+// Ruta protegida para reserva de turnos por usuarios autenticados
 router.post('/', verificarToken, crearTurno);
-router.put('/:id', verificarToken, actualizarTurno);
 
-// Ruta con autorizacion estricta por rol (solo administradores pueden eliminar registros)
+// Rutas con autorizacion basada en roles (RBAC)
+router.put('/:id', verificarToken, permitirRoles('admin', 'recepcion'), actualizarTurno);
 router.delete('/:id', verificarToken, permitirRoles('admin'), eliminarTurno);
 
 module.exports = router;
